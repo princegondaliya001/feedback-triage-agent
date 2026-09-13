@@ -111,7 +111,10 @@ class TriagePipeline:
                 # Questions still become issues (label: question) so support can answer them.
                 pass
 
-            duplicate, score = find_duplicate(classification.title, existing, self.config.dedup_threshold)
+            duplicate, score = max(
+                (find_duplicate(t, existing, self.config.dedup_threshold) for t in (classification.title, item.subject)),
+                key=lambda r: r[1],
+            )
             self.tracer.event(
                 "decision.dedup",
                 {"score": score, "matched": duplicate.number if duplicate else None, "threshold": self.config.dedup_threshold},

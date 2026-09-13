@@ -47,6 +47,8 @@ severity accuracy, area accuracy, end-to-end action correctness, pipeline failur
 `--real-llm` runs the identical harness against Claude so model quality can be measured and
 regressions caught before deployment.
 
+**Evaluation-driven prompt iteration.** First live run (Claude): type 10/10, action 10/10, severity 5/10. Trace review showed two systematic causes — feature requests received none, and billing errors / team-wide lockouts were rated high. One prompt revision raised severity to 8/10 with no code change; the two remaining misses are one level apart and area: workspace vs general is the model being more specific than the label. Both tables are in `eval/results.md`.
+
 **Live trace.** Each run writes `logs/trace-<run-id>.jsonl`; the Slack digest carries the run id so
 any issue can be traced back to the exact model output and tool calls that produced it.
 

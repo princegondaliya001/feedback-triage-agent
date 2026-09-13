@@ -45,7 +45,12 @@ def main() -> int:
     settings = get_settings()
     rows = json.loads(FIXTURES.read_text(encoding="utf-8"))
     items = [FeedbackItem(**{k: v for k, v in r.items() if k != "expected"}) for r in rows]
-    classifier = build_classifier(mock=not args.real_llm, api_key=settings.anthropic_api_key, model=settings.anthropic_model)
+    classifier = build_classifier(
+        mock=not args.real_llm,
+        api_key=settings.anthropic_api_key,
+        model=settings.anthropic_model,
+        workspace_id=settings.anthropic_workspace_id,
+    )
 
     tracer = Tracer(ROOT / "logs", run_id="eval-" + datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%SZ"))
     pipeline = TriagePipeline(

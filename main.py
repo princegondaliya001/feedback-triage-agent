@@ -45,7 +45,12 @@ def build_pipeline(args: argparse.Namespace) -> TriagePipeline:
     approve = auto_approve if args.auto_approve else terminal_approval
 
     if args.mock:
-        classifier = build_classifier(mock=not args.real_llm, api_key=settings.anthropic_api_key, model=settings.anthropic_model)
+        classifier = build_classifier(
+            mock=not args.real_llm,
+            api_key=settings.anthropic_api_key,
+            model=settings.anthropic_model,
+            workspace_id=settings.anthropic_workspace_id,
+        )
         return TriagePipeline(
             inbox=MockInbox(load_fixture_items()),
             tracker=MockIssueTracker(),
@@ -68,7 +73,12 @@ def build_pipeline(args: argparse.Namespace) -> TriagePipeline:
         inbox=GmailInbox(settings.gmail_credentials_file, settings.gmail_token_file, settings.gmail_label),
         tracker=GitHubIssues(settings.github_token, settings.github_repo),
         notifier=SlackWebhook(settings.slack_webhook_url),
-        classifier=build_classifier(mock=False, api_key=settings.anthropic_api_key, model=settings.anthropic_model),
+        classifier=build_classifier(
+            mock=False,
+            api_key=settings.anthropic_api_key,
+            model=settings.anthropic_model,
+            workspace_id=settings.anthropic_workspace_id,
+        ),
         tracer=tracer,
         config=config,
         approve=approve,

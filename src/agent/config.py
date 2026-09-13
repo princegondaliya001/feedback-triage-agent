@@ -20,6 +20,7 @@ class Settings:
     # LLM
     anthropic_api_key: str = field(default_factory=lambda: _env("ANTHROPIC_API_KEY"))
     anthropic_model: str = field(default_factory=lambda: _env("ANTHROPIC_MODEL", "claude-sonnet-4-6"))
+    anthropic_workspace_id: str = field(default_factory=lambda: _env("ANTHROPIC_WORKSPACE_ID", ""))
 
     # Gmail
     gmail_credentials_file: str = field(default_factory=lambda: _env("GMAIL_CREDENTIALS_FILE", "credentials.json"))

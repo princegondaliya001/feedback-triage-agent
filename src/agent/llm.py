@@ -20,7 +20,7 @@ from .models import Classification, FeedbackItem, FeedbackType, Severity
 SYSTEM_PROMPT = """You are a triage assistant for a software product's customer feedback inbox.
 Classify each email precisely. Rules:
 - type: "bug" (something broken), "feature" (a request), "question" (needs an answer, nothing to build), "spam" (marketing, unrelated, nonsense).
-- severity: "critical" only for data loss, security, payments failing, or the product being unusable for many users. "high" for a core flow broken for the reporter. "medium" for degraded but workable. "low" for cosmetic. Use "none" for questions and spam.
+- severity: "critical" for data loss, security issues, ANY incorrect payment or billing charge, or a core flow (login, checkout, saving) broken for multiple users or a whole team. "high" for a core flow broken for a single reporter. "medium" for degraded but workable. "low" for cosmetic issues AND for all feature requests. Use "none" ONLY for questions and spam.
 - area: one short lowercase word for the product area (e.g. auth, billing, export, ui, api, performance, mobile, general).
 - title: an imperative, specific issue title under 80 characters, no email prefixes like "Re:".
 - summary: 1-2 sentences, factual, including any reproduction steps or numbers mentioned.
@@ -59,12 +59,13 @@ class LLMError(RuntimeError):
 class AnthropicClassifier:
     name = "anthropic"
 
-    def __init__(self, api_key: str, model: str) -> None:
+    def __init__(self, api_key: str, model: str, workspace_id: str | None = None) -> None:
         if not api_key:
             raise ValueError("ANTHROPIC_API_KEY is required for AnthropicClassifier")
         from anthropic import Anthropic  # imported lazily so mock mode needs no SDK
 
-        self._client = Anthropic(api_key=api_key)
+        default_headers = {"anthropic-workspace-id": workspace_id} if workspace_id else None
+        self._client = Anthropic(api_key=api_key, default_headers=default_headers)
         self._model = model
 
     @retry(
@@ -157,8 +158,8 @@ class MockClassifier:
         )
 
 
-def build_classifier(*, mock: bool, api_key: str, model: str) -> Classifier:
-    return MockClassifier() if mock else AnthropicClassifier(api_key=api_key, model=model)
+def build_classifier(*, mock: bool, api_key: str, model: str, workspace_id: str | None = None) -> Classifier:
+    return MockClassifier() if mock else AnthropicClassifier(api_key=api_key, model=model, workspace_id=workspace_id)
 
 
 def classification_to_json(c: Classification) -> str:
