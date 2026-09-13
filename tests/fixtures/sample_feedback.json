@@ -1,0 +1,82 @@
+[
+  {
+    "id": "m001",
+    "sender": "priya@acme-corp.com",
+    "subject": "Cannot log in after password reset",
+    "body": "Hi team,\n\nSince yesterday I cannot log in. I reset my password, got the email, set a new one, and the login page still says 'invalid credentials'. Tried Chrome and Firefox. My account is priya@acme-corp.com.\n\nThis is blocking my whole team of 12 people.\n\nPriya",
+    "received_at": "2026-09-13T08:02:00Z",
+    "expected": {"type": "bug", "severity": "critical", "area": "auth"}
+  },
+  {
+    "id": "m002",
+    "sender": "dan@startup.io",
+    "subject": "Export to CSV fails with 500 error",
+    "body": "When I click Export > CSV on the Reports page I get a 500 error. Happens every time for reports with more than ~2000 rows. Smaller reports export fine.\n\nDan",
+    "received_at": "2026-09-13T08:10:00Z",
+    "expected": {"type": "bug", "severity": "high", "area": "export"}
+  },
+  {
+    "id": "m003",
+    "sender": "sam@designhouse.co",
+    "subject": "Feature request: dark mode",
+    "body": "Love the product. It would be great if you could add a dark mode - I use it late at night and the white background is harsh.\n\nThanks!",
+    "received_at": "2026-09-13T08:15:00Z",
+    "expected": {"type": "feature", "severity": "low", "area": "ui"}
+  },
+  {
+    "id": "m004",
+    "sender": "lee@consulting.example",
+    "subject": "How do I add a team member?",
+    "body": "Hello, quick question - how do I invite another person to my workspace? I can't find the button. Is it possible on the free plan?",
+    "received_at": "2026-09-13T08:20:00Z",
+    "expected": {"type": "question", "severity": "none", "area": "general"}
+  },
+  {
+    "id": "m005",
+    "sender": "promo@seo-boost-now.biz",
+    "subject": "Rank #1 on Google - limited offer!",
+    "body": "We offer premium SEO services and guest post placements. Buy now and get 50% off. Click here to claim. Unsubscribe at any time.",
+    "received_at": "2026-09-13T08:25:00Z",
+    "expected": {"type": "spam", "severity": "none", "area": "general"}
+  },
+  {
+    "id": "m006",
+    "sender": "maria@acme-corp.com",
+    "subject": "Re: Login broken after resetting password",
+    "body": "Same problem as my colleague Priya reported - after a password reset I cannot log in, always 'invalid credentials'. Please fix ASAP.",
+    "received_at": "2026-09-13T08:31:00Z",
+    "expected": {"type": "bug", "severity": "critical", "area": "auth", "duplicate_of": "m001"}
+  },
+  {
+    "id": "m007",
+    "sender": "omar@fintech.example",
+    "subject": "Charged twice for September subscription",
+    "body": "My card was charged twice on Sep 1 for the Pro plan ($49 x 2). Invoice numbers INV-1042 and INV-1043. Please refund one of them and check whether this affects other customers.",
+    "received_at": "2026-09-13T08:40:00Z",
+    "expected": {"type": "bug", "severity": "critical", "area": "billing"}
+  },
+  {
+    "id": "m008",
+    "sender": "jess@agency.example",
+    "subject": "Dashboard is very slow to load",
+    "body": "The main dashboard takes 20-30 seconds to load since last week's update. It used to be instant. We have about 15k records. Not blocking but annoying.",
+    "received_at": "2026-09-13T08:45:00Z",
+    "expected": {"type": "bug", "severity": "medium", "area": "performance"}
+  },
+  {
+    "id": "m009",
+    "sender": "tom@mobiledev.example",
+    "subject": "Please add webhook support for the API",
+    "body": "We'd like to receive a webhook when a record is updated instead of polling the API every minute. Support for a simple POST callback with a shared secret would be enough. Would be nice to have this by Q4.",
+    "received_at": "2026-09-13T08:50:00Z",
+    "expected": {"type": "feature", "severity": "low", "area": "api"}
+  },
+  {
+    "id": "m010",
+    "sender": "ana@school.example",
+    "subject": "Wrong date shown on iPhone",
+    "body": "In the iOS app the 'last updated' date is shown one day earlier than on the website. Timezone is Europe/Lisbon. Cosmetic, but confusing.",
+    "received_at": "2026-09-13T08:55:00Z",
+    "expected": {"type": "bug", "severity": "low", "area": "mobile"}
+  }
+]
